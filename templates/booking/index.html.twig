@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookingController!{% endblock %}
+
+{% block body %}
+    <div class="mx-5">
+        <h1>{{ service.name }}</h1>
+        <h3>{{ service.price }}€</h3>
+        <h3>{{ service.duration }}</h3>
+        <p>{{ service.description }}</p>
+
+        {{ form(form) }}
+    </div>
+
+{% endblock %}
