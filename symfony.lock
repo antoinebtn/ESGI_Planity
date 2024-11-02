@@ -13,6 +13,19 @@
             "src/Repository/.gitignore"
         ]
     },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.1",
+            "ref": "1d01ec03c6ecbd67c3375c5478c9a423ae5d6a33"
+        },
+        "files": [
+            "config/packages/doctrine_migrations.yaml",
+            "migrations/.gitignore"
+        ]
+    },
     "symfony/console": {
         "version": "7.1",
         "recipe": {
@@ -78,6 +91,19 @@
             "config/routes.yaml"
         ]
     },
+    "symfony/security-bundle": {
+        "version": "7.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "6.4",
+            "ref": "2ae08430db28c8eb4476605894296c82a642028f"
+        },
+        "files": [
+            "config/packages/security.yaml",
+            "config/routes/security.yaml"
+        ]
+    },
     "symfony/twig-bundle": {
         "version": "7.1",
         "recipe": {
@@ -90,5 +116,8 @@
             "config/packages/twig.yaml",
             "templates/base.html.twig"
         ]
+    },
+    "twig/extra-bundle": {
+        "version": "v3.13.0"
     }
 }
