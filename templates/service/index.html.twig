@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ServiceController!{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-wrap justify-content-around">
+        {% for service in services %}
+            <div class="card mt-3" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ service.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Durée : {{ service.duration }}€</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Prix : {{ service.price }}€</h6>
+                    <p class="card-text">{{ service.description | u.truncate(100, '...') }}</p>
+                    <a href="{{ path('app_booking', {'id': service.id}) }}" class="card-link">Réserver</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
