@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use function Symfony\Component\Clock\now;
 
 class BookingController extends AbstractController
 {
@@ -60,7 +61,15 @@ class BookingController extends AbstractController
             $booking = $form->getData();
             $booking->setService($service);
 
-            if ($this->bookingHandler->iSAvailable($booking)){
+            if ($booking->getStartDate() < now()) {
+                $error = 'Vous ne pouvez pas choisir une date déjà passée';
+
+                return $this->render('booking/create.html.twig', [
+                    'error' => $error,
+                    'service' => $service,
+                    'form' => $form->createView(),
+                ]);
+            } else if ($this->bookingHandler->iSAvailable($booking)){
                 $startDate = $booking->getStartDate();
                 $endDate = clone $startDate;
                 $endDate->modify('+' . $service->getDuration() . ' minutes');
