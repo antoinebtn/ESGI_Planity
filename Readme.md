@@ -3,6 +3,12 @@ Lancer la bdd docker (ou changer la DATABASE_URL dans le .env)
 ```
 docker compose up -d
 ```
+
+Installer les dépendances
+```
+composer install
+```
+
 Charger les fixtures
 ```
 php bin/console doctrine:fixtures:load
