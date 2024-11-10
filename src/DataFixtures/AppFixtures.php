@@ -12,7 +12,7 @@ class AppFixtures extends Fixture
     {
         for ($i = 0; $i < 10; $i++) {
             $service = new Service();
-            $service->setName('Service ' . $i);
+            $service->setName('Service ' . $i + 1);
             $service->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent hendrerit condimentum nisl a efficitur. Maecenas tincidunt mollis enim in maximus. Nullam mollis urna volutpat vehicula commodo. Aenean vehicula risus nisl, ut bibendum eros efficitur id. Phasellus posuere in magna et laoreet. Quisque at est tellus.');
             $service->setDuration(($i + 1) * 10);
             $service->setPrice($i * 10);
