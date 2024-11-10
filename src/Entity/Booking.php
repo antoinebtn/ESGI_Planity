@@ -15,7 +15,7 @@ class Booking
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    private ?\DateTimeInterface $startDate = null;
 
     #[ORM\Column(length: 255)]
     private ?string $status = null;
@@ -26,19 +26,22 @@ class Booking
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     private ?Service $service = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $endDate = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->startDate;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setStartDate(\DateTimeInterface $date): static
     {
-        $this->date = $date;
+        $this->startDate = $date;
 
         return $this;
     }
@@ -75,6 +78,18 @@ class Booking
     public function setService(?Service $service): static
     {
         $this->service = $service;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(\DateTimeInterface $endDate): static
+    {
+        $this->endDate = $endDate;
 
         return $this;
     }

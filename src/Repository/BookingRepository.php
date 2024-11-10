@@ -16,28 +16,22 @@ class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
-    //    /**
-    //     * @return Booking[] Returns an array of Booking objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('b.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function isBookingConflict(Booking $booking, \DateTimeInterface $startDate, \DateTimeInterface $endDate): bool
+    {
+        $qb = $this->createQueryBuilder('b');
 
-    //    public function findOneBySomeField($value): ?Booking
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        if ($booking->getId() !== null) {
+            $qb->andWhere('b.id != :currentBookingId')
+                ->setParameter('currentBookingId', $booking->getId());
+        }
+
+        $qb->andWhere('b.startDate < :endDate')
+            ->andWhere('b.endDate > :startDate')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate);
+
+        $conflictingBookings = $qb->getQuery()->getResult();
+
+        return count($conflictingBookings) > 0;
+    }
 }
