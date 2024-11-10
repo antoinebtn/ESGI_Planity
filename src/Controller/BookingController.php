@@ -32,7 +32,7 @@ class BookingController extends AbstractController
         ]);
     }
 
-    #[Route('/booking/{id}', name: 'app_booking_show')]
+    #[Route('/booking/{id}', name: 'app_booking_show', requirements: ['id' => '\d+'])]
     public function show(int $id): Response
     {
         $booking = $this->entityManager->getRepository(Booking::class)->findOneBy(['id' => $id]);
@@ -96,5 +96,29 @@ class BookingController extends AbstractController
             'service' => $service,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/booking/cancel/{id}', name: 'app_booking_cancel', requirements: ['id' => '\d+'])]
+    public function cancel(int $id, Request $request): Response
+    {
+        $booking = $this->entityManager->getRepository(Booking::class)->findOneBy(['id' => $id]);
+
+
+        return $this->render('booking/cancel.html.twig', [
+            'booking' => $booking,
+        ]);
+    }
+
+    #[Route('/booking/cancel/confirm/{id}', name: 'app_booking_cancel_confirm', requirements: ['id' => '\d+'])]
+    public function cancelConfirm(int $id, Request $request): Response
+    {
+        $booking = $this->entityManager->getRepository(Booking::class)->findOneBy(['id' => $id]);
+
+        $booking->setStatus('cancelled');
+
+        $this->entityManager->persist($booking);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_booking');
     }
 }

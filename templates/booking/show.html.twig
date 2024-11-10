@@ -12,6 +12,8 @@
                 </div>
             {% endif %}
             <h1>{{ booking.service.name }}</h1>
+            <h4>{{ booking.service.cityCode }} {{ booking.service.city }}</h4>
+            <h4>{{ booking.service.adress }}</h4>
             <strong>Date de réservation: {{ booking.startDate | date() }}</strong>
             <p>{{ booking.service.description }}</p>
 

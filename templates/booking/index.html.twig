@@ -34,7 +34,7 @@
                             {% endif %}
                         </td>
                         <td>{{ booking.startDate | date() }}</td>
-                        <td><a href="" class="btn btn-warning">Annuler la réservation</a></td>
+                        <td><a href="{{ path('app_booking_cancel', {'id': booking.id}) }}" class="btn btn-warning">Annuler la réservation</a></td>
                     </tr>
 
                 {% endfor %}

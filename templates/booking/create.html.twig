@@ -13,6 +13,8 @@
             {% endif %}
             <div class="mx-5">
                 <h1>Service: {{ service.name }}</h1>
+                <h4>{{ service.cityCode }} {{ service.city }}</h4>
+                <h4>{{ service.adress }}</h4>
                 <h3>Prix: {{ service.price }}€</h3>
                 <h3>Durée: {{ service.duration }}</h3>
                 <p><strong>Description:</strong> {{ service.description }}</p>

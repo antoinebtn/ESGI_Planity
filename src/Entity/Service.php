@@ -34,6 +34,15 @@ class Service
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'service')]
     private Collection $bookings;
 
+    #[ORM\Column(length: 255)]
+    private ?string $city = null;
+
+    #[ORM\Column]
+    private ?int $cityCode = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $adress = null;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -118,6 +127,42 @@ class Service
                 $booking->setService(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): static
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCityCode(): ?int
+    {
+        return $this->cityCode;
+    }
+
+    public function setCityCode(int $cityCode): static
+    {
+        $this->cityCode = $cityCode;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): static
+    {
+        $this->adress = $adress;
 
         return $this;
     }
